@@ -1,0 +1,47 @@
+[
+  {
+    "file": "correct-chime.mp3",
+    "creator": "Kenney",
+    "sourcePage": "https://kenney.nl/assets/music-jingles",
+    "sourceFile": "Audio/Pizzicato jingles/jingles_PIZZI02.ogg",
+    "sourceSha256": "4967dc3cd31257716f455ef50f8980378726ce086954c7a5563c0c57ee129e3e",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "Converted OGG to MP3, reduced gain and softened clip edges; gentle low-pass filtering for chime/error.",
+    "sha256": "cd3236b4ce52e8c92746458917aa80127d5a150b22e301fdb473f1ec5187529f",
+    "bytes": 11149
+  },
+  {
+    "file": "tap.mp3",
+    "creator": "Kenney",
+    "sourcePage": "https://kenney.nl/assets/interface-sounds",
+    "sourceFile": "Audio/click_001.ogg",
+    "sourceSha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "Converted OGG to MP3, reduced gain and softened clip edges; gentle low-pass filtering for chime/error.",
+    "sha256": "ae9e273ca6f8a7183d69b4809c07f539e99cc598eda64a83a8e9aa54623224f4",
+    "bytes": 1556
+  },
+  {
+    "file": "wrong.mp3",
+    "creator": "Kenney",
+    "sourcePage": "https://kenney.nl/assets/interface-sounds",
+    "sourceFile": "Audio/error_001.ogg",
+    "sourceSha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "changes": "Converted OGG to MP3, reduced gain and softened clip edges; gentle low-pass filtering for chime/error.",
+    "sha256": "cc88ce6c71cb040e0552ba5e12c7e2f4606f48e781e14568ec5d8296f7cf0575",
+    "bytes": 2937
+  },
+  {
+    "file": "background.mp3",
+    "creator": "Existing Daily Math original loop",
+    "sourceFile": "daily-math-background.wav",
+    "sourceSha256": "7ea6fb5e24f7913e338797d8ed92f96fd0bc78d526084ed0038aa56dd33920b8",
+    "changes": "Converted existing game-owned WAV loop to compressed MP3; no Shift Shift track used.",
+    "sha256": "b459356a0bfb28acae058fa912069ab4b3b490d6fff4627e87905b94f8699d90",
+    "bytes": 142763
+  }
+]

@@ -1,0 +1,25 @@
+/* A short, soft arrival for the existing rounded glossy star; no confetti layer. */
+#resultDialog[open] #resultEmblem.celebrate{isolation:isolate}
+#resultDialog[open] #resultEmblem.celebrate::before{content:"";position:absolute;inset:12px 4px 6px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,rgba(255,211,68,.3),rgba(255,224,125,.08) 58%,transparent 73%);pointer-events:none;animation:daily-warm-halo .8s ease-out both}
+#resultDialog[open] #resultEmblem.celebrate .reward-star{transform-origin:50% 65%;animation:daily-star-bounce .72s cubic-bezier(.22,.85,.32,1) both;filter:drop-shadow(0 4px 0 #e6d9b8)}
+#resultDialog[open] #resultEmblem.celebrate .spark{font-size:23px;color:#ffd44d;-webkit-text-stroke:1.5px #101127;line-height:1;pointer-events:none;animation:daily-sparkle .75s ease-out both}
+#resultDialog[open] #resultEmblem.celebrate .s1{left:-2px;top:21px;--dx:-9px;--dy:-11px;animation-delay:.13s}
+#resultDialog[open] #resultEmblem.celebrate .s2{right:-3px;top:57px;--dx:10px;--dy:-7px;animation-delay:.21s}
+#resultDialog[open]:has(#resultEmblem.celebrate) #resultReward{animation:daily-reward-arrive .42s .16s ease-out both}
+@keyframes daily-star-bounce{
+  0%{opacity:0;transform:translateY(9px) scale(.78) rotate(-6deg)}
+  42%{opacity:1;transform:translateY(-4px) scale(1.045) rotate(2deg)}
+  69%{opacity:1;transform:translateY(1px) scale(.985) rotate(-.6deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+@keyframes daily-sparkle{
+  0%{opacity:0;transform:translate(0,0) scale(.45) rotate(-10deg)}
+  28%{opacity:.95;transform:translate(0,-2px) scale(1) rotate(3deg)}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.65) rotate(13deg)}
+}
+@keyframes daily-warm-halo{0%{opacity:0;transform:scale(.85)}38%{opacity:.75;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+@keyframes daily-reward-arrive{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  #resultDialog[open] #resultEmblem.celebrate .reward-star,#resultDialog[open]:has(#resultEmblem.celebrate) #resultReward{animation:none!important;opacity:1;transform:none}
+  #resultDialog[open] #resultEmblem.celebrate::before,#resultDialog[open] #resultEmblem.celebrate .spark{display:none;animation:none!important}
+}
