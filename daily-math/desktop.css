@@ -1,74 +1,47 @@
-/* Keep the original vertical order; wide screens only widen the play surface. */
+/* Centered landscape board; mobile keeps its compact portrait arrangement. */
 .game>header{position:relative;justify-content:center}
 .game>header .header-art{flex:none;width:min(300px,calc(100% - 110px));margin:0 auto}
 .game>header #settings{position:absolute;right:0;top:50%;transform:translateY(-50%)}
 .game>header #settings:active{transform:translateY(calc(-50% + 3px))}
 .game>#challengeButton{display:none!important}
 @media(min-width:900px) and (min-height:500px){
-  .game{width:100%;max-width:none;height:100dvh;min-height:0;margin:0;padding:14px 24px 20px;display:flex;flex-direction:column;gap:12px}
-  .game>header{width:100%;height:60px;min-height:60px;flex:none;margin:0!important}
-  .game .header-art{height:60px}
-  .game>.badges{width:100%;max-width:none;align-self:center;grid-template-columns:1.08fr 1fr;height:49px;gap:12px;margin:0!important}
-  .game>.play-area{width:100%;flex:1;min-height:0}
-  .game .board{padding:16px!important;gap:12px}
-  .game .play-area .problem{padding:10px 48px 0!important;gap:12px!important}
-  .game .problem .equation{max-width:none;align-self:center}
-  .game .diagram-stage{max-width:760px;align-self:center}
-  .game .answers,.game .board .confirm-answer{width:100%;max-width:none;align-self:center}
-  .game>.tools{width:100%;max-width:none;align-self:center;height:59px;gap:12px;margin:0!important}
-  .game>.tools .chunk{height:55px!important;min-height:55px!important}
-  .game .welcome{width:min(100%,420px)}
-  #scratchDialog{width:min(90vw,1100px);height:92dvh;max-height:92dvh;padding:20px}
-  #scratchDialog .pen-tools,#scratchDialog .ink-options{max-width:480px;width:100%;align-self:center}
-  #tutorDialog{width:min(80vw,640px)}
+ .game{width:min(100%,1100px);max-width:1100px;height:100dvh;min-height:0;margin:0 auto;padding:12px 18px 18px;display:grid;grid-template-columns:140px minmax(0,680px) 140px;grid-template-rows:64px minmax(0,1fr) 60px;justify-content:center;gap:14px 22px}
+ .game>header{grid-column:1/-1;grid-row:1;width:100%;height:64px;min-height:64px;margin:0!important}
+ .game .header-art{height:64px;width:340px}
+ .game>.badges{grid-column:1;grid-row:2;align-self:center;display:flex;flex-direction:column;width:140px;height:auto;gap:18px;margin:0!important}
+ .game .badge{width:140px;height:140px!important;min-height:140px!important;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:12px!important;border-radius:24px;font-size:25px!important}
+ .game .badge strong,.game .badge .score-word{font-size:27px!important;line-height:1.05}
+ .game .badge.gold strong{border-left:0!important;padding:0;margin:0}
+ .game .badge .art-icon{width:34px;height:34px}
+ .game>.play-area{grid-column:2;grid-row:2;min-width:0;min-height:0;width:100%;height:100%}
+ .game .board{padding:18px!important;gap:12px;border-radius:32px}
+ .game .play-area .problem{padding:8px 36px 0!important;gap:10px!important;justify-content:center!important}
+ .game .problem .equation,.game .play-area .problem.with-diagram .equation{padding:0 18px!important;font-size:30px!important;line-height:1.18!important}
+ .game .problem:not(.with-diagram) .equation:not(.long){font-size:clamp(52px,7.5vh,76px)!important}
+ .game .answers{--tile-size:clamp(90px,21vh,190px);display:grid;grid-template-columns:repeat(2,var(--tile-size));justify-content:center;align-self:center;width:100%;gap:14px!important}
+ .game .board:has(.with-diagram) .answers{--tile-size:clamp(85px,16vh,150px)}
+ .game .answer{width:var(--tile-size);height:var(--tile-size)!important;min-height:var(--tile-size)!important;aspect-ratio:1;padding:12px!important;border-radius:24px}
+ .game .answer .value{font-size:clamp(34px,5vh,48px)!important}.game .answer .value.long{font-size:30px!important}
+ .game .answer .selection-marker{bottom:12px!important;font-size:13px!important;line-height:15px!important}
+ .game .board .confirm-answer{width:min(100%,480px);max-width:480px;align-self:center;height:56px!important;min-height:56px!important;font-size:29px!important}
+ .game>.tools{grid-column:2;grid-row:3;width:100%;max-width:480px;justify-self:center;height:60px;gap:14px;margin:0!important}
+ .game>.tools .chunk{height:56px!important;min-height:56px!important;font-size:27px!important}
+ .game .utility-tools{top:16px;right:16px}
+ .game .welcome{width:min(100%,420px)}
+ .game>.storage:not(:empty),.game>.status:not(:empty){grid-column:3;grid-row:2;align-self:end;font-size:13px}
+ #scratchDialog{width:min(90vw,1100px);height:92dvh;max-height:92dvh;padding:20px}
+ #scratchDialog .pen-tools,#scratchDialog .ink-options{max-width:480px;width:100%;align-self:center}
+ #tutorDialog{width:min(80vw,640px)}
 }
-@media(min-width:900px) and (min-height:500px) and (max-height:700px){
-  .game{padding:8px 18px 14px;gap:8px}
-  .game>header{height:48px;min-height:48px}.game .header-art{height:47px}
-  .game>.badges{height:42px}
-  .game .board{padding:10px!important;gap:7px}
-  .game .play-area .problem{padding-top:5px!important;gap:6px!important}
-  .game>.tools{height:52px}.game>.tools .chunk{height:48px!important;min-height:48px!important}
-}
-
-/* Larger desktop targets, retaining the original top-to-bottom arrangement. */
-@media(min-width:900px) and (min-height:500px){
- .game{padding:12px 16px 14px;gap:12px}
- .game>header{height:70px;min-height:70px}.game .header-art{height:70px;width:340px}
- .game>.badges{height:60px;gap:16px}
- .game .badge{height:56px!important;min-height:56px!important;font-size:28px!important}
- .game .badge strong,.game .badge .score-word{font-size:28px!important}
- .game .badge .art-icon{width:36px;height:36px}
- .game .answers{gap:14px!important}
- .game .answer{height:80px!important;min-height:80px!important}
- .game .answer .value{font-size:42px!important}.game .answer .value.long{font-size:32px!important}
- .game .board .confirm-answer{height:64px!important;min-height:64px!important;font-size:30px!important}
- .game>.tools{height:68px;max-width:none;gap:16px}.game>.tools .chunk{height:64px!important;min-height:64px!important;font-size:30px!important}
- .game .problem .equation,.game .play-area .problem.with-diagram .equation{font-size:30px!important}
- .game .problem:not(.with-diagram) .equation:not(.long){font-size:46px!important}
-}
-@media(min-width:900px) and (min-height:500px) and (max-height:700px){
- .game{padding:8px 12px 12px;gap:8px}
- .game>header{height:50px;min-height:50px}.game .header-art{height:50px}
- .game>.badges{height:48px}.game .badge{height:44px!important;min-height:44px!important;font-size:25px!important}
- .game .badge strong,.game .badge .score-word{font-size:25px!important}
- .game .answer{height:60px!important;min-height:60px!important}.game .answer .value{font-size:34px!important}
- .game .board .confirm-answer{height:52px!important;min-height:52px!important;font-size:27px!important}
- .game>.tools{height:56px}.game>.tools .chunk{height:52px!important;min-height:52px!important;font-size:27px!important}
- .game .problem .equation,.game .play-area .problem.with-diagram .equation{font-size:26px!important}
- .game .problem:not(.with-diagram) .equation:not(.long){font-size:36px!important}
-}
-/* Desktop answer choices are square tiles, rather than stretched bars. */
-@media(min-width:900px) and (min-height:500px){
- .game .answers{--tile-size:clamp(100px,20vh,200px);display:grid;grid-template-columns:repeat(4,var(--tile-size));justify-content:center;width:100%;gap:18px!important}
- .game .answer{width:var(--tile-size);height:var(--tile-size)!important;min-height:var(--tile-size)!important;aspect-ratio:1;padding:12px!important;border-radius:26px}
- .game .answer .value{font-size:clamp(32px,3.5vw,48px)!important}
- .game .answer .value.long{font-size:clamp(24px,2.5vw,34px)!important}
- .game .answer .selection-marker{bottom:14px!important;font-size:14px!important;line-height:16px!important}
- .game .board .confirm-answer{width:min(100%,600px);max-width:600px}
- .game>.tools{max-width:600px}
-}
-@media(min-width:900px) and (min-height:500px) and (max-height:700px){
- .game .answers{--tile-size:clamp(90px,19vh,130px);gap:14px!important}
- .game .answer .selection-marker{bottom:10px!important;font-size:12px!important}
+@media(min-width:900px) and (min-height:500px) and (max-height:650px){
+ .game{grid-template-rows:48px minmax(0,1fr) 52px;padding:8px 16px 12px;gap:9px 18px;grid-template-columns:120px minmax(0,620px) 120px}
+ .game>header{height:48px;min-height:48px}.game .header-art{height:48px}
+ .game>.badges{width:120px}.game .badge{width:120px;height:120px!important;min-height:120px!important;gap:4px}
+ .game .board{padding:12px!important;gap:8px}
+ .game .answers{--tile-size:clamp(88px,19vh,120px);gap:10px!important}
+ .game .board:has(.with-diagram) .answers{--tile-size:85px}
+ .game .board .confirm-answer,.game>.tools .chunk{height:48px!important;min-height:48px!important;font-size:25px!important}
+ .game>.tools{height:52px}
+ .game .play-area .problem{padding-top:0!important;gap:4px!important}
+ .game .problem .equation,.game .play-area .problem.with-diagram .equation{font-size:25px!important}
 }
