@@ -103,3 +103,9 @@
  .desktop-workspace>#calcDialog{padding:12px 10px}.desktop-workspace #calcDialog h2{margin-bottom:10px}
  .desktop-workspace #calcKeys .chunk{height:46px;min-height:46px}
 }
+
+/* Let answer choices use the board's horizontal space without stretching edge-to-edge. */
+@media(min-width:900px) and (min-height:500px){
+ .game .answers{width:90%;max-width:520px;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .game .answer{width:100%;height:var(--tile-size)!important;min-height:var(--tile-size)!important}
+}
