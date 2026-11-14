@@ -45,3 +45,12 @@
  .game .play-area .problem{padding-top:0!important;gap:4px!important}
  .game .problem .equation,.game .play-area .problem.with-diagram .equation{font-size:25px!important}
 }
+
+/* Black pillarboxing marks the edge of the desktop game skin. */
+@media(min-width:900px) and (min-height:500px){
+ html,body{background:#000}
+ body::before{display:none}
+ .game{isolation:isolate;background:radial-gradient(ellipse at top,#394981,transparent 75%),#1b244a}
+ .game::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.15;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'%3E%3Cg stroke='%2396a8ef' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M20 25h22m-11-11v22M80 100l15 15m0-15l-15 15M80 40h20'/%3E%3C/g%3E%3Cg fill='%2396a8ef'%3E%3Ccircle cx='90' cy='30' r='3'/%3E%3Ccircle cx='90' cy='50' r='3'/%3E%3C/g%3E%3C/svg%3E")}
+ .game .answer{height:calc(var(--tile-size) * .84)!important;min-height:calc(var(--tile-size) * .84)!important;aspect-ratio:auto;border-radius:22px}
+}
