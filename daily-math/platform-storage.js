@@ -36,7 +36,10 @@
         if (!Array.isArray(values) || values.length !== unique.length) throw new Error('Invalid saved data');
         unique.forEach((key, index) => {
           const value = values[index];
-          cache.set(key, value == null ? null : typeof value === 'string' ? value : JSON.stringify(value));
+          // Some host bridges serialize an absent value before returning it.
+          // These sentinels cannot represent a valid state/profile object.
+          const missing = value == null || (typeof value === 'string' && ['', 'null', 'undefined'].includes(value.trim()));
+          cache.set(key, missing ? null : typeof value === 'string' ? value : JSON.stringify(value));
         });
         initialized = true; writable = true; publish('ready'); return true;
       } catch (_) {
