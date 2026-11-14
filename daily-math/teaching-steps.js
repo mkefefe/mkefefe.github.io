@@ -26,7 +26,7 @@ var improvedTeachingSteps = (() => {
         let dots='';
         for(let i=0;i<total;i++){
           const removed=!plus&&i>=result,fill=removed?'#d2d9e2':plus&&i>=a?'#ffdb43':'#54c7ee';
-          dots+=`<circle cx="${30+(i%10)*28}" cy="${22+Math.floor(i/10)*27}" r="8" fill="${fill}" stroke="${removed?'#a9b3bf':'#24364d'}" stroke-width="1.5"${removed?' class="taken-away"':''}/>`;
+          dots+=`<circle cx="${160-((Math.min(10,total-Math.floor(i/10)*10)-1)*28)/2+(i%10)*28}" cy="${22+Math.floor(i/10)*27}" r="8" fill="${fill}" stroke="${removed?'#a9b3bf':'#24364d'}" stroke-width="1.5"${removed?' class="taken-away"':''}/>`;
         }
         const picture=total?`<svg class="arithmetic-working" viewBox="0 0 320 ${total>10?68:42}" width="320" height="${total>10?68:42}" role="img" aria-label="${plus?`${a} blue dots and ${b} yellow dots make ${result}`:`${b} of ${a} dots are gray and taken away; ${result} blue dots remain`}" style="display:block;width:100%;max-width:320px;margin:auto">${dots}</svg>`:'';
         return [card(picture+line(`${a} ${symbol} ${b} = <span class="ink">${result}</span>`),plus?'Count the blue and yellow dots together.':`Take away ${b} ${b===1?'dot':'dots'}. ${result} blue ${result===1?'dot remains':'dots remain'}.`,result)];
