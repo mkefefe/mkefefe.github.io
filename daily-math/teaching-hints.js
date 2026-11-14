@@ -87,7 +87,7 @@ function arithmeticScaffold(p, stage) {
   const dot=(x,y,fill)=>`<circle cx="${x}" cy="${y}" r="7" fill="${fill}" stroke="#24364d" stroke-width="1.5"/>`;
   if(stage===1){
     if(plus&&a<=10&&b<=10){
-      const group=(count,start,fill)=>`<rect x="${start}" y="8" width="125" height="84" rx="16" fill="#f1f6fa" stroke="#d2dce7" stroke-width="2"/><text x="${start+62.5}" y="30" text-anchor="middle" fill="#24364d" font-size="20" style="font-size:20px">${count} ${count===1?'dot':'dots'}</text>`+Array.from({length:count},(_,i)=>dot(start+62.5-((Math.min(5,count-Math.floor(i/5)*5)-1)*21)/2+(i%5)*21,48+Math.floor(i/5)*23,fill)).join('');
+      const group=(count,start,fill)=>`<rect x="${start}" y="8" width="125" height="84" rx="16" fill="#f1f6fa" stroke="#d2dce7" stroke-width="2"/><text x="${start+62.5}" y="30" text-anchor="middle" fill="#24364d" font-size="20" style="font-size:20px">${count} ${count===1?'dot':'dots'}</text>`+Array.from({length:count},(_,i)=>dot(start+62.5-((Math.min(5,count-Math.floor(i/5)*5)-1)*21)/2+(i%5)*21,62-(Math.ceil(count/5)-1)*11.5+Math.floor(i/5)*23,fill)).join('');
       return {html:svg(group(a,5,'#55c6f1')+group(b,190,'#ffdc43')+'<text x="160" y="61" text-anchor="middle" font-size="29" style="font-size:29px" fill="#24364d">+</text>',`${a} blue dots plus ${b} yellow dots; total not filled in`,100),label:'Put the two groups together. Count all the dots.'};
     }
     if(!plus&&a<=20){
@@ -97,19 +97,17 @@ function arithmeticScaffold(p, stage) {
     return {html:`<div class="math-line"><span class="ink">${a}</span> ${sign} ${b} = □</div>`,label:plus?`Start with ${a}. Add ${b} more.`:`Start with ${a}. Take away ${b}.`};
   }
   if(b===0)return {html:`<div class="math-line">${a} ${sign} 0 = □</div>`,label:'Adding or taking away zero leaves the starting amount unchanged.'};
-  const small=b<=8;
-  const step=small?1:10**Math.max(1,Math.floor(Math.log10(b)));
-  let low,high;
-  if(small){low=a-(plus?2:b+1);high=a+(plus?b+1:2);if(a<=6&&b<=4){low=-1;high=Math.max(6,a+b+1)}}
-  else {low=a-3*step;high=a+3*step}
-  const count=Math.round((high-low)/step),left=22,right=298,y=62,space=(right-left)/count;
+  const step=b<=12?1:10**Math.floor(Math.log10(b));
+  const hops=Math.ceil(b/step)+2;
+  const low=plus?a:a-(b>a?hops:Math.min(hops,Math.floor(a/step)))*step,high=plus?a+hops*step:a;
+  const count=Math.ceil((high-low)/step),left=22,right=298,y=62,space=(right-left)/count;
   let body=`<path d="M12 ${y}H308m-6 -5 6 5-6 5M18 ${y-5}l-6 5 6 5" fill="none" stroke="#24364d" stroke-width="2.5" stroke-linecap="round"/>`;
   for(let i=0;i<=count;i++){
-    const value=low+i*step,x=left+i*space,isStart=value===a;
+    const value=plus?low+i*step:high-(count-i)*step,x=left+i*space,isStart=value===a;
     body+=`<path d="M${x} ${y-6}v12" stroke="${isStart?'#1683a6':'#24364d'}" stroke-width="${isStart?3:2}"/><text x="${x}" y="${y+29}" text-anchor="middle" fill="${isStart?'#1683a6':'#24364d'}" style="font-size:${count>10?16:19}px">${value<0?'−'+Math.abs(value):value}</text>`;
     if(isStart)body+=`<path d="M${x} 25v21m-5-6 5 6 5-6" fill="none" stroke="#1683a6" stroke-width="2.5" stroke-linejoin="round"/>`;
   }
   const direction=plus?'right':'left';
-  const label=small?`Start at ${a}. Move ${b} ${b===1?'tick':'ticks'} to the ${direction}.`:`Start at ${a}. Move ${direction} ${Math.floor(b/step)} ticks (${Math.floor(b/step)*step})${b%step?`, then ${b%step} more`:""}.`;
+  const label=`Start at ${a}. Move ${b} to the ${direction}.`;
   return {html:svg(body,`Number line from ${low} to ${high}, ticks every ${step}; only the starting number ${a} is marked`,110),label};
 }
