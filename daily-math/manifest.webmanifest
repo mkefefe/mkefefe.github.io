@@ -1,0 +1,23 @@
+{
+  "name": "Daily Math",
+  "short_name": "Daily Math",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#26335f",
+  "theme_color": "#26335f",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

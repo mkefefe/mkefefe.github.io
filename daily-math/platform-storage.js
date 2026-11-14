@@ -28,11 +28,16 @@
         if (!await root.DailyPlatform.initialize()) throw new Error('Platform unavailable');
         const unique = [...new Set(keys)];
         const values = await Promise.race([
-          root.bridge.storage.get(unique),
+          // Bridge v2 defaults parse=true and otherwise JSON-decodes our JSON
+          // strings into objects. This facade must preserve localStorage strings.
+          root.bridge.storage.get(unique, false),
           new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('Save restore timed out')), 10000); })
         ]);
         if (!Array.isArray(values) || values.length !== unique.length) throw new Error('Invalid saved data');
-        unique.forEach((key, index) => cache.set(key, values[index] == null ? null : String(values[index])));
+        unique.forEach((key, index) => {
+          const value = values[index];
+          cache.set(key, value == null ? null : typeof value === 'string' ? value : JSON.stringify(value));
+        });
         initialized = true; writable = true; publish('ready'); return true;
       } catch (_) {
         // Do not overwrite an existing cloud save with defaults after a failed read.
